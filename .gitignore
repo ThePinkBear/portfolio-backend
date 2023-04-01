@@ -13,6 +13,14 @@
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
 
+# Visual Studio Code generated files
+.vscode/
+*.vscode/
+
+# Build output
+bin/
+obj/
+
 # Mono auto generated files
 mono_crash.*
 
