@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace portfolio_backend.Controllers;
 
 [ApiController]
-[Route("[controller]")]
+[Route("api/[controller]")]
 public class PortfolioBackendController : ControllerBase
 {
     private readonly ILogger<PortfolioBackendController> _logger;
