@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace portfolio_backend;
 [ApiController]
-[Route("api/[controller]")]
+[Route("api2/[controller]")]
 public class ImagesController : ControllerBase
 {
   private readonly PortfolioDbContext _context;
