@@ -4,11 +4,11 @@ using Microsoft.EntityFrameworkCore;
   namespace portfolio_backend;
   [ApiController]
   [Route("api/[controller]")]
-  public class TextController : ControllerBase
+  public class TextsController : ControllerBase
   {
     private readonly PortfolioDbContext _context;
 
-    public TextController(PortfolioDbContext context)
+    public TextsController(PortfolioDbContext context)
     {
       _context = context;
     }
