@@ -25,6 +25,11 @@ namespace portfolio_backend
         {
             return await _context.TextPost.ToListAsync();
         }
+        [HttpGet("test")]
+        public string Test()
+        {
+            return "test";
+        }
 
         // GET: api/Text/5
         [HttpGet("{id}")]
