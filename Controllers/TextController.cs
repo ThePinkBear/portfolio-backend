@@ -28,10 +28,10 @@ namespace portfolio_backend
         [HttpGet("test")]
         public async Task<string> Test()
         {
-            var database = _context.TextPost.FirstOrDefault();
+            var database = await _context.TextPost.FirstOrDefaultAsync();
             if (database != null)
             {
-                return database.Text;
+                return $"This comes from the database: {database.Text}";
             }
             return "test";
         }
