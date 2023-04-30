@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
-
+  namespace portfolio_backend;
   [ApiController]
   [Route("api/[controller]")]
   public class TextController : ControllerBase
@@ -13,7 +13,6 @@ using Microsoft.EntityFrameworkCore;
       _context = context;
     }
 
-    // GET: api/Text
     [HttpGet]
     public async Task<ActionResult<IEnumerable<TextPost>>> GetTextPost()
     {
@@ -36,7 +35,6 @@ using Microsoft.EntityFrameworkCore;
       return "no luck";
     }
 
-    // GET: api/Text/5
     [HttpGet("{id}")]
     public async Task<ActionResult<TextPost>> GetTextPost(int id)
     {
@@ -50,8 +48,6 @@ using Microsoft.EntityFrameworkCore;
       return textPost;
     }
 
-    // PUT: api/Text/5
-    // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
     [HttpPut("{id}")]
     public async Task<IActionResult> PutTextPost(int id, TextPost textPost)
     {
@@ -81,8 +77,6 @@ using Microsoft.EntityFrameworkCore;
       return NoContent();
     }
 
-    // POST: api/Text
-    // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
     [HttpPost]
     public async Task<ActionResult<TextPost>> PostTextPost(TextPost textPost)
     {
@@ -92,7 +86,6 @@ using Microsoft.EntityFrameworkCore;
       return CreatedAtAction("GetTextPost", new { id = textPost.Id }, textPost);
     }
 
-    // DELETE: api/Text/5
     [HttpDelete("{id}")]
     public async Task<IActionResult> DeleteTextPost(int id)
     {

@@ -1,4 +1,4 @@
-
+namespace portfolio_backend;
 public class TextPost
 {
     public int Id { get; set; }

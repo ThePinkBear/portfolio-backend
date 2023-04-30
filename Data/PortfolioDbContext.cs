@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 
+namespace portfolio_backend;
 public class PortfolioDbContext : DbContext
     {
         public PortfolioDbContext (DbContextOptions<PortfolioDbContext> options)

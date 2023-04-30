@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using portfolio_backend;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<PortfolioDbContext>(options =>

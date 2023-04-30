@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 
-
+namespace portfolio_backend;
 [ApiController]
 [Route("api/[controller]")]
 public class PortfolioBackendController : ControllerBase
@@ -13,12 +13,13 @@ public class PortfolioBackendController : ControllerBase
     }
 
     [HttpGet]
-    public object Get()
+    public TextPost Get()
     {
         _logger.LogInformation("It's working");
-        return new {
-          id = 1,
-          text = "Hello World!"
+        return new (){
+          Id = 1,
+          Name = "Test",
+          Text = "Hello World!"
         };
     }
 }

@@ -1,3 +1,4 @@
+namespace portfolio_backend;
 public class Image
 {
     public int Id { get; set; }
