@@ -26,8 +26,13 @@ namespace portfolio_backend
             return await _context.TextPost.ToListAsync();
         }
         [HttpGet("test")]
-        public string Test()
+        public async Task<string> Test()
         {
+            var database = _context.TextPost.FirstOrDefault();
+            if (database != null)
+            {
+                return database.Text;
+            }
             return "test";
         }
 
