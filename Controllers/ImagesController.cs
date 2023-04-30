@@ -20,6 +20,11 @@ namespace portfolio_backend.__restWithNoViews
         {
             return await _context.Image.ToListAsync();
         }
+        [HttpGet("test")]
+        public string Test()
+        {
+            return "test";
+        }
 
         // GET: api/Images/5
         [HttpGet("{id}")]

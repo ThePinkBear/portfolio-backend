@@ -1,14 +1,9 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace portfolio_backend
 {
-    [Route("api/[controller]")]
+  [Route("api/[controller]")]
     [ApiController]
     public class TextController : ControllerBase
     {
@@ -26,14 +21,20 @@ namespace portfolio_backend
             return await _context.TextPost.ToListAsync();
         }
         [HttpGet("test")]
-        public async Task<string> Test()
+        public string Test()
+        {
+            return "Hello World!";
+        }
+
+        [HttpGet("dbtest")]
+        public async Task<string> TestDb()
         {
             var database = await _context.TextPost.FirstOrDefaultAsync();
             if (database != null)
             {
                 return $"This comes from the database: {database.Text}";
             }
-            return "test";
+            return "no luck";
         }
 
         // GET: api/Text/5
