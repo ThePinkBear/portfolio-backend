@@ -1,25 +1,26 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace portfolio_backend;
 [ApiController]
 [Route("api/[controller]")]
 public class PortfolioBackendController : ControllerBase
 {
-    private readonly ILogger<PortfolioBackendController> _logger;
+    private readonly PortfolioDbContext _context;
 
-    public PortfolioBackendController(ILogger<PortfolioBackendController> logger)
+    public PortfolioBackendController(PortfolioDbContext context)
     {
-        _logger = logger;
+      _context = context;
     }
 
-    [HttpGet]
-    public TextPost Get()
+   [HttpGet]
+    public async Task<ActionResult<IEnumerable<TextPost>>> GetTextPost()
     {
-        _logger.LogInformation("It's working");
-        return new (){
-          Id = 1,
-          Name = "Test",
-          Text = "Hello World!"
-        };
+      return await _context.TextPost.ToListAsync();
+    }
+    [HttpGet("test")]
+    public string Test()
+    {
+      return "Hello World!";
     }
 }
