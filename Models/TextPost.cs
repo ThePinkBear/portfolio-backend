@@ -1,3 +1,4 @@
+
 public class TextPost
 {
     public int Id { get; set; }

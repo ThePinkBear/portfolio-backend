@@ -1,8 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
-namespace portfolio_backend.__restWithNoViews
-{
+
   [ApiController]
   [Route("api/[controller]")]
   public class ImagesController : ControllerBase
@@ -103,4 +102,4 @@ namespace portfolio_backend.__restWithNoViews
       return _context.Image.Any(e => e.Id == id);
     }
   }
-}
+

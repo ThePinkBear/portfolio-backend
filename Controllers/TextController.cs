@@ -1,8 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
-namespace portfolio_backend
-{
+
   [ApiController]
   [Route("api/[controller]")]
   public class TextController : ControllerBase
@@ -114,4 +113,4 @@ namespace portfolio_backend
       return _context.TextPost.Any(e => e.Id == id);
     }
   }
-}
+
