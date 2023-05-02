@@ -7,7 +7,5 @@ public class PortfolioDbContext : DbContext
             : base(options)
         {
         }
-
-        public DbSet<Image> Image { get; set; } = default!;
         public DbSet<TextPost> TextPost { get; set; } = default!;
     }
