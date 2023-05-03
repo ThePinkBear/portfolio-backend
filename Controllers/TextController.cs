@@ -19,9 +19,13 @@ using Microsoft.EntityFrameworkCore;
       return await _context.TextPost.ToListAsync();
     }
     [HttpGet("test")]
-    public string Test()
+    public IEnumerable<TextPost> Test()
     {
-      return "Hello World!";
+      return new List<TextPost> 
+      { 
+        new TextPost { Id = 1, Text = "Why yes" }, 
+        new TextPost { Id = 2, Text = "yes we can!" } 
+      };
     }
 
     [HttpGet("dbtest")]

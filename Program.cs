@@ -19,6 +19,7 @@ builder.Services
     options.RequireHttpsMetadata = false;
   });
 
+
 builder.Services.AddSingleton<IAuthorizationHandler, HasScopeHandler>();
 
 builder.Services.AddAuthorization(options =>
