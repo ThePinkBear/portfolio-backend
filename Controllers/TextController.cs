@@ -23,8 +23,8 @@ using Microsoft.EntityFrameworkCore;
     {
       return new List<TextPost> 
       { 
-        new TextPost { Id = 1, Text = "Why yes" }, 
-        new TextPost { Id = 2, Text = "yes we can!" } 
+        new TextPost { Id = 1, Name = "Why yes", Text = "yes we can" }, 
+        new TextPost { Id = 2, Name = "This is currently deployed", Text = "on Azure" } 
       };
     }
 
