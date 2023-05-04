@@ -6,6 +6,9 @@ using portfolio_backend;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddControllers();
+builder.Services.AddSwaggerGen();
 
 builder.Services.AddDbContext<PortfolioDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("db_connection") ?? throw new InvalidOperationException("Connection string 'portfolio_db_pinkbear_test' not found.")));
@@ -16,7 +19,6 @@ builder.Services
   {
     options.Authority = builder.Configuration["Auth0:Domain"];
     options.Audience = builder.Configuration["Auth0:Audience"];
-    options.RequireHttpsMetadata = false;
   });
 
 
@@ -24,17 +26,18 @@ builder.Services.AddSingleton<IAuthorizationHandler, HasScopeHandler>();
 
 builder.Services.AddAuthorization(options =>
 {
-  options.AddPolicy(
-  "admin",
-  policy => policy.Requirements.Add(
-  new HasScopeRequirement("admin:edit", builder.Configuration["Auth0:Domain"]))
-  );
+  var issuer = builder.Configuration["Auth0:Domain"];
+  if (!string.IsNullOrEmpty(issuer))
+  {
+    options.AddPolicy(
+    "admin:edit",
+    policy => policy.Requirements.Add(
+    new HasScopeRequirement("admin:edit",
+     issuer))
+    );
+  }
 });
 
-builder.Services.AddControllers();
-
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
@@ -46,9 +49,9 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+app.UseAuthentication();
 
 app.UseAuthorization();
-app.UseAuthentication();
 
 app.MapControllers();
 

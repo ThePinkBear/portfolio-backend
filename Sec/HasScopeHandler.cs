@@ -4,23 +4,25 @@ namespace portfolio_backend;
 public class HasScopeHandler : AuthorizationHandler<HasScopeRequirement>
 {
   protected override Task HandleRequirementAsync(AuthorizationHandlerContext context, HasScopeRequirement requirement)
-  {
-    if (!context.User.HasClaim(c => c.Type == "scope" && c.Issuer == requirement.Issuer))
+{
+    if (context.User == null)
     {
-      return Task.CompletedTask;
+        return Task.CompletedTask;
     }
 
-    var scopes = context.User
-      .FindFirst(
-        c => c.Type == "scope" 
-        && c.Issuer == requirement.Issuer)
-      .Value.Split(' ');
+    var scopeClaim = context.User.FindFirst(c => c.Type == "scope" && c.Issuer == requirement.Issuer);
+    if (scopeClaim == null)
+    {
+        return Task.CompletedTask;
+    }
+
+    var scopes = scopeClaim.Value.Split(' ');
 
     if (scopes.Any(s => s == requirement.Scope))
     {
-      context.Succeed(requirement);
+        context.Succeed(requirement);
     }
 
     return Task.CompletedTask;
-  }
+}
 }
