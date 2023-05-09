@@ -6,9 +6,9 @@ using Microsoft.EntityFrameworkCore;
   [Route("api/[controller]")]
   public class TextsController : ControllerBase
   {
-    private readonly PortfolioDbContext _context;
+    private readonly TextDbContext _context;
 
-    public TextsController(PortfolioDbContext context)
+    public TextsController(TextDbContext context)
     {
       _context = context;
     }

@@ -20,7 +20,7 @@ public class PortfolioBackendController : ControllerBase
   public IActionResult ProfilePictures(string image) 
     => Ok($"{_config.GetSection("Images:url").Value}{image}?token={_config.GetSection("Images:token").Value}");
   
-
+  
   [HttpGet("private")]
   [Authorize]
   public IActionResult Private() 
