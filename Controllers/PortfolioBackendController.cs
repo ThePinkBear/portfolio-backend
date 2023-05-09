@@ -6,23 +6,30 @@ namespace portfolio_backend;
 [Route("api/[controller]")]
 public class PortfolioBackendController : ControllerBase
 {
-  public string PUBLIC = "You have permission to view this public post.";
-  public string PRIVATE = "You have permission to view this private post.";
-  public string ADMIN = "You have admin permission to view this post.";
+  private readonly IConfiguration _config;
+  public PortfolioBackendController(IConfiguration config)
+  {
+    _config = config;
+  }
 
   [HttpGet("public")]
   public IActionResult Public() 
-    =>Ok(new { message = PUBLIC });
+    =>Ok(new { message = _config.GetSection("Messages:public").Value });
+
+  [HttpGet("profile-pictures")]
+  public IActionResult ProfilePictures(string image) 
+    => Ok($"{_config.GetSection("Images:url").Value}{image}?token={_config.GetSection("Images:token").Value}");
+  
 
   [HttpGet("private")]
   [Authorize]
   public IActionResult Private() 
-    => Ok(new { message = PRIVATE });
+    => Ok(new { message = _config.GetSection("Messages:private").Value });
 
   [HttpGet("read-scoped")]
   [Authorize("admin:edit")]
   public IActionResult ReadScoped()
-    => Ok(new { message = ADMIN });
+    => Ok(new { message = _config.GetSection("Messages:admin").Value });
   
   [HttpGet("claims")]
   public IActionResult Claims()
