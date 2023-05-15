@@ -8,57 +8,24 @@ using Microsoft.EntityFrameworkCore;
   {
     private readonly TextDbContext _context;
 
-    public TextsController(TextDbContext context)
-    {
-      _context = context;
-    }
-
+    public TextsController(TextDbContext context) => _context = context;
+    
     [HttpGet]
     public async Task<ActionResult<IEnumerable<TextPost>>> GetTextPost()
-    {
-      return await _context.TextPost.ToListAsync();
-    }
-    [HttpGet("test")]
-    public IEnumerable<TextPost> Test()
-    {
-      return new List<TextPost> 
-      { 
-        new TextPost { Id = 1, Name = "Why yes", Text = "yes we can" }, 
-        new TextPost { Id = 2, Name = "This is currently deployed", Text = "on Azure" } 
-      };
-    }
-
-    [HttpGet("dbtest")]
-    public async Task<string> TestDb()
-    {
-      var database = await _context.TextPost.FirstOrDefaultAsync();
-      if (database != null)
-      {
-        return $"This comes from the database: {database.Text}";
-      }
-      return "no luck";
-    }
+      => await _context.TextPost.ToListAsync();
 
     [HttpGet("{id}")]
     public async Task<ActionResult<TextPost>> GetTextPost(int id)
     {
       var textPost = await _context.TextPost.FindAsync(id);
 
-      if (textPost == null)
-      {
-        return NotFound();
-      }
-
-      return textPost;
+      return (textPost == null) ? NotFound() : textPost;
     }
 
     [HttpPut("{id}")]
     public async Task<IActionResult> PutTextPost(int id, TextPost textPost)
     {
-      if (id != textPost.Id)
-      {
-        return BadRequest();
-      }
+      if (id != textPost.Id) return BadRequest();
 
       _context.Entry(textPost).State = EntityState.Modified;
 
@@ -68,14 +35,9 @@ using Microsoft.EntityFrameworkCore;
       }
       catch (DbUpdateConcurrencyException)
       {
-        if (!TextPostExists(id))
-        {
-          return NotFound();
-        }
-        else
-        {
-          throw;
-        }
+        return (!TextPostExists(id)) 
+          ? NotFound() 
+          : throw new Exception("Error updating text post");
       }
 
       return NoContent();
@@ -84,11 +46,8 @@ using Microsoft.EntityFrameworkCore;
     [HttpPost]
     public async Task<ActionResult<TextPost>> PostTextPost(TextPost textPostDTO)
     {
-      var textPost = new TextPost
-      {
-        Name = textPostDTO.Name,
-        Text = textPostDTO.Text
-      };
+      var textPost = new TextPost { Name = textPostDTO.Name, Text = textPostDTO.Text};
+      
       _context.TextPost.Add(textPost);
       await _context.SaveChangesAsync();
 
@@ -113,6 +72,16 @@ using Microsoft.EntityFrameworkCore;
     private bool TextPostExists(int id)
     {
       return _context.TextPost.Any(e => e.Id == id);
+    }
+
+    [HttpGet("test")]
+    public IEnumerable<TextPost> Test()
+    {
+      return new List<TextPost> 
+      { 
+        new TextPost { Id = 1, Name = "Why yes", Text = "yes we can" }, 
+        new TextPost { Id = 2, Name = "This is currently deployed", Text = "on Azure" } 
+      };
     }
   }
 
