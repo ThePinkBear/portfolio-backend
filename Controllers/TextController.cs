@@ -44,10 +44,10 @@ using Microsoft.EntityFrameworkCore;
     }
 
     [HttpPost]
-    public async Task<ActionResult<TextPost>> PostTextPost(TextPost textPostDTO)
+    public async Task<ActionResult<TextPost>> PostTextPost(TextPostDTO textPostDTO)
     {
       var textPost = new TextPost { Name = textPostDTO.Name, Text = textPostDTO.Text};
-      
+
       _context.TextPost.Add(textPost);
       await _context.SaveChangesAsync();
 
