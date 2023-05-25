@@ -4,7 +4,7 @@ namespace portfolio_backend;
 public class HasScopeHandler : AuthorizationHandler<HasScopeRequirement>
 {
   protected override Task HandleRequirementAsync(AuthorizationHandlerContext context, HasScopeRequirement requirement)
-{
+  {
     if (context.User == null)
     {
         return Task.CompletedTask;
@@ -24,5 +24,5 @@ public class HasScopeHandler : AuthorizationHandler<HasScopeRequirement>
     }
 
     return Task.CompletedTask;
-}
+  }
 }

@@ -48,7 +48,7 @@ using Microsoft.EntityFrameworkCore;
     {
       var textPost = new TextPost { Name = textPostDTO.Name, Text = textPostDTO.Text};
 
-      _context.TextPost.Add(textPost);
+      var result = _context.TextPost.Add(textPost);
       await _context.SaveChangesAsync();
 
       return CreatedAtAction("GetTextPost", new { id = textPost.Id }, textPost);
