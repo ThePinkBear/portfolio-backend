@@ -58,11 +58,8 @@ using Microsoft.EntityFrameworkCore;
     public async Task<IActionResult> DeleteTextPost(int id)
     {
       var textPost = await _context.TextPost.FindAsync(id);
-      if (textPost == null)
-      {
-        return NotFound();
-      }
-
+      if (textPost == null) return NotFound();
+    
       _context.TextPost.Remove(textPost);
       await _context.SaveChangesAsync();
 
@@ -74,8 +71,8 @@ using Microsoft.EntityFrameworkCore;
       return _context.TextPost.Any(e => e.Id == id);
     }
 
-    [HttpGet("test")]
-    public IEnumerable<TextPost> Test()
+    [HttpGet("temporary")]
+    public IEnumerable<TextPost> Temporary()
     {
       return new List<TextPost> 
       { 
