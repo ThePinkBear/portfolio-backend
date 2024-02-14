@@ -44,11 +44,11 @@ using Microsoft.EntityFrameworkCore;
     }
 
     [HttpPost]
-    public async Task<ActionResult<TextPost>> PostTextPost(TextPostDTO textPostDTO)
+    public async Task<ActionResult<TextPost>> PostTextPost(TextPost tp)
     {
-      var textPost = new TextPost { Name = textPostDTO.Name, Text = textPostDTO.Text};
+      var textPost = new TextPost { Name = tp.Name, Text = tp.Text};
 
-      var result = _context.TextPost.Add(textPost);
+      _context.TextPost.Add(textPost);
       await _context.SaveChangesAsync();
 
       return CreatedAtAction("GetTextPost", new { id = textPost.Id }, textPost);
@@ -80,7 +80,7 @@ using Microsoft.EntityFrameworkCore;
       return new List<TextPost> 
       { 
         new TextPost { Id = 1, Name = "home", Text = "Check my About me and Projects pages for more info." }, 
-        new TextPost { Id = 3, Name = "about", Text = "I have worn many hats in my career, I have been a Bus Driver, a Security Guard. I have worked with alarm installations, on and off I’ve been in sales, in total I estimate it to amount to six years or so.\nI worked for several years in traffic control management ensuring the delivery of public bus transportation in stockholm.\nI managed to build and run my own Café in 2010-2011 and as I proved competent in sales I was promoted to storemanager and ran my own store when I worked for GameStop.\n\nAs these jobs ate my twenties away and I found myself making lateral movements over and over in my career I finally came to the belated realisation that some education and time spent on self improvement would probably break the mould and lead me to a more progressive life.\n\nWhen in my late teens / early twenties I completed my education at Komvux, I had a short fling with web development and enjoyed it immensely.\nIt combined my love for puzzles with the esthetical and creative part of me in a hugely satisfactory way. I completed the course with lot’s of praise from my instructors but as I had no clear road of advancement in the field laid before me I let it lie, until in my early thirties did some belated soul searching and over all life evaluation.\n\nI remembered my love for coding and development and decided that this will be my goal, I will become a software developer.\n\nAfter some attempts to find a good learning track on my own I stumbled upon </salt>.\nI applied, got in, and gave it 110%. I graduated as a Full-Stack .Net Developer and it resulted in me being hired on as an Instructor for the subsequent two following bootcamps.\nIt was chaotic, it was challenging and it was one of the most rewarding experiences of my life." } 
+        new TextPost { Id = 3, Name = "about", Text = "I have worn many hats in my career, I have been a Bus Driver, a Security Guard. I have worked with alarm installations, on and off I’ve been in sales, in total I estimate it to amount to six years or so.\nI worked for several years in traffic control management ensuring the delivery of public bus transportation in stockholm.\nI managed to build and run my own Café in 2010-2011 and as I proved competent in sales I was promoted to storemanager and ran my own store when I worked for GameStop.\n\nAs these jobs ate my twenties away and I found myself making lateral movements over and over in my career I finally came to the belated realisation that some education and time spent on self improvement would probably break the mould and lead me to a more progressive life.\n\nWhen in my late teens / early twenties I completed my education at Komvux, I had a short fling with web development and enjoyed it immensely.\nIt combined my love for puzzles with the esthetical and creative part of me in a hugely satisfactory way. I completed the course with lots of praise from my instructors but as I had no clear road of advancement in the field laid before me I let it lie, until in my early thirties did some belated soul searching and over all life evaluation.\n\nI remembered my love for coding and development and decided that this will be my goal, I will become a software developer.\n\nAfter some attempts to find a good learning track on my own I stumbled upon </salt>.\nI applied, got in, and gave it 110%. I graduated as a Full-Stack .Net Developer and it resulted in me being hired on as an Instructor for the subsequent two following bootcamps.\nIt was chaotic, it was challenging and it was one of the most rewarding experiences of my life." } 
       };
     }
   }
